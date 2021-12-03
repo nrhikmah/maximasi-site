@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maximasi Site</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="shortcut icon" href="favicon.ico" type="image/icon type">
+</head>
+<style>
+    @font-face {
+           font-family: indosat;
+           src: url(Ooredoo-Heavy.otf);     
+   }
+   
+   @font-face {
+           font-family: noto;
+           src: url(NotoSans-Regular.ttf);       
+   }
+   
+   @font-face {
+           font-family: noto-bold-italic;
+           src: url(NotoSans-BoldItalic.ttf);       
+   }
+   </style> 
+<body style="background-color: #ffcd00; font-family: 'indosat';">
+    <div class="container mt-5 mb-5 p-3 card text-center " style="width: 95%; border-width: 3px; border-radius: 10px; box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.322);">
+        <h5>Maximasi Site</h5>
+        <h4>Site is Factory</h4>
+        <form id="myForm">
+            <div class="form-group row">
+                <label for="inputRevenue" class="col-sm-2 col-form-label fw-bold">Revenue</label>
+                <div class="col-sm-10" style="font-family: 'noto';">
+                    <input type="number" class="form-control input-group mb-2 money" id="revenue" placeholder=" Input Revenue" onkeyup="revenue">
+                </div>
+                
+            </div>
+            <div class="form-group row">
+                <label for="inputProgram" class="col-sm-2 col-form-label fw-bold">VLR</label>
+                <div class="col-sm-10" style="font-family: 'noto';">
+                    <input type="number" class="form-control input-group mb-2" id="vlr" placeholder="Input  VLR">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputProgram" class="col-sm-2 col-form-label fw-bold">ARPU</label>
+                <div class="col-sm-10" style="font-family: 'noto';">
+                    <input type="number" class="form-control input-group mb-2" placeholder="ARPU" id="arpu" disabled>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputProgram" class="col-sm-2 col-form-label fw-bold">PRB/Sector (%)</label>
+                <div class="col-sm-10" style="font-family: 'noto';">
+                    <input type="number" class="form-control input-group mb-2" id="prb" placeholder="Input PRB">
+                    <small id="alert" class="form-text text-muted text-left">
+                      </small>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputProgram" class="col-sm-2 col-form-label fw-bold">Populasi</label>
+                <div class="col-sm-10" style="font-family: 'noto';">
+                    <input type="number" class="form-control input-group mb-2" id="populasi" placeholder="Input Populasi">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputProgram" class="col-sm-2 col-form-label fw-bold">Market Share (%)</label>
+                <div class="col-sm-10" style="font-family: 'noto';">
+                    <input type="number" class="form-control input-group mb-2" id="ms" placeholder="Input Market Share">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="inputProgram" class="col-sm-2 col-form-label fw-bold">Jumlah Outlet</label>
+                <div class="col-sm-10" style="font-family: 'noto';">
+                    <input type="number" class="form-control input-group mb-2" id="outlet" placeholder="Input Jumlah Outlet">
+                </div>
+            </div>
+    
+            <button type="button" class="btn px-sm-5" style="background-color: 
+            #ffcd00; color: black; border-radius: 25px;" onclick="hitung()">Hitung</button>
+            <!-- <button type="button" class="btn px-sm-5 btn-primary" style="background-color: 
+            #ffcd00; color: black; border-radius: 25px;" onclick="details()">Details</button> -->
+            <button type="button" class="btn px-sm-5" style="background-color: 
+            #ed1c24; color: white; border-radius: 25px;" onclick="resetButton()">Reset!</button>
+        </form>
+
+        <br>
+        <div id="display">
+            <table class="table table-warning m-auto" style="width: 75%;">
+                <tr>
+                    <td class="w-50 text-left">
+                        Penambahan VLR
+                    </td>
+                    <td class=" text-left">
+                        : <span id="addVlr"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-50 text-left">
+                        Penambahan Market Share
+                    </td>
+                    <td class=" text-left">
+                        : <span id="addMs"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-50 text-left">
+                        Penambahan Populasi
+                    </td>
+                    <td class=" text-left">
+                        : <span id="addPopulasi"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-50 text-left">
+                        Target Revenue (PRB 85%)
+                    </td>
+                    <td class=" text-left">
+                        : <span id="target"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-50 text-left">
+                        GAP Revenue
+                    </td>
+                    <td class="w-50 text-left">
+                        : <span id="gap"></span>
+                    </td>
+                </tr> 
+                <tr>
+                    <td class="w-50 text-left">
+                        Revenue per outlet
+                    </td>
+                    <td class=" text-left">
+                        : <span id="rev_outlet"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="w-50 text-left">
+                        Penambahan Revenue per outlet (Base on target Revenue)
+                    </td>
+                    <td class=" text-left">
+                        : <span id="tar_rev_outlet"></span>
+                    </td>
+                </tr>          
+            </table>
+            <br>
+        </div>
+    </div>
+    <footer class="text-center mb-3" style="font-size: 70%;">
+        Made by : Nur Hikmah Intern Kampus Merdeka Batch 2 :)
+    </footer>
+    <script src="script.js"></script>
+    <!-- <script src="jquery-3.6.0.min.js"></script>
+    <script src="jquery.masknumber.js"></script> -->
+    
+</body>
+
+</html>
